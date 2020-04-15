@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="c"><!-- 后面再讲namespace的作用，这里随便写 -->
+	<select id="select" resultType="String">
+		select username from account where id = #{id}
+	</select>
+	<select id="selectObject" resultType="com.box.pojo.Customer">
+		select * from customer where id = #{id}
+	</select>
+	
+	<select id="selectList" resultType="com.box.pojo.Customer">
+		select * from account where username like "%"#{n}"%"
+	</select>
+	
+	<select id="selectList2" resultType="com.box.pojo.Customer"><!--P94 这里就不能随便写｛内容｝了，因为底层用了map，在后面周五讲 -->
+<!-- 		select * from account where username like "%${n}%" -->
+		select * from account where username like "%${value}%"
+	</select>
+	
+	<select id="selectList3" resultType="com.box.pojo.Customer"><!-- 书上94页下 -->
+		select * from account where username like concat("%",#{n},"%")
+	</select>
+</mapper>
